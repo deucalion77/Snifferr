@@ -33,8 +33,9 @@ class IP(Structure):
                 }
         
         # Human Readble form
+       # self.id_num      = socket.inet_ntoa(struct.pack("!I",self.id))
         self.src_address = socket.inet_ntoa(struct.pack("@I",self.src))
-        self.dst_address = socket.inet_ntoa(struct.pack("!I",self.dst))
+        self.dst_address = socket.inet_ntoa(struct.pack("@I",self.dst))
 
         try:
             self.protocol = self.protocol_map[self.protocol_num]
@@ -56,7 +57,6 @@ try:
         # Creating an IP header from the first 20 bytes of the buffer
         ip = IP(resp[14:])
         #print("RAW: ", ip)
-
         # Print out protocol and the host
         print("Protocol: %s %s -> %s" % (ip.protocol, ip.src_address, ip.dst_address))
 except KeyboardInterrupt:
